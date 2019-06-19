@@ -23,9 +23,6 @@ class StudentItem extends Component {
                 Roll: <b>{roll}</b>{" "}
               </p>
               <p>
-                id: <b>{_id}</b>{" "}
-              </p>
-              <p>
                 Department: <b>{department}</b>{" "}
               </p>
 
