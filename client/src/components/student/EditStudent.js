@@ -73,7 +73,7 @@ class EditStudent extends Component {
 
                 <div className="form-group">
                   <input
-                    type="text"
+                    type="number"
                     name="roll"
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.roll

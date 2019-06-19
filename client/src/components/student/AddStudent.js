@@ -14,10 +14,10 @@ class AddStudent extends Component {
   };
 
   //componentWillReceiveProps(nextProps) {
-  // if (nextProps.errors) {
-  //  this.setState({ errors: nextProps.errors });
+  //if (nextProps.errors) {
+  //this.setState({ errors: nextProps.errors });
   //}
-  // }
+  //}
 
   onchange = e => {
     this.setState({
@@ -64,7 +64,7 @@ class AddStudent extends Component {
 
                 <div className="form-group">
                   <input
-                    type="text"
+                    type="number"
                     name="roll"
                     className={classnames("form-control form-control-lg", {
                       "is-invalid": errors.roll
