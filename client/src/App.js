@@ -14,7 +14,6 @@ import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import AddStudent from "./components/student/AddStudent";
 import Dashboard from "./components/Dashboard";
-import Students from "./components/student/Students";
 import EditStudent from "./components/student/EditStudent";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -46,9 +45,7 @@ function App() {
             <Switch>
               <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
-            <Switch>
-              <PrivateRoute exact path="/student" component={Students} />
-            </Switch>
+
             <Switch>
               <PrivateRoute
                 exact

@@ -5,7 +5,7 @@ import { GET_STUDENT, GET_CURRENT_STUDENT, GET_ERRORS } from "./types";
 export const addStudent = (newStudent, history) => dispatch => {
   axios
     .post("/student", newStudent)
-    .then(res => history.push("/student"))
+    .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,
@@ -37,7 +37,7 @@ export const getCurrentStudent = id => dispatch => {
 export const updateStudent = (id, newInfo, history) => dispatch => {
   axios
     .post(`/student/edit/${id}`, newInfo)
-    .then(res => history.push("/student"))
+    .then(res => history.push("/dashboard"))
     .catch(err =>
       dispatch({
         type: GET_ERRORS,

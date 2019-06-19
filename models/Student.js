@@ -12,7 +12,7 @@ const StudentSchema = new Schema({
     required: true
   },
   roll: {
-    type: Number,
+    type: String,
     required: true
   },
   department: {

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import StudentItem from "./student/StudentItem";
 import { getStudent } from "../actions/studentAction";
 
 class Dashboard extends Component {
@@ -7,15 +8,18 @@ class Dashboard extends Component {
     this.props.getStudent();
   }
   render() {
+    const { students } = this.props;
     return (
-      <div className="container">
-        <h1>Dashboard</h1>
+      <div>
+        {students.map(student => (
+          <StudentItem key={student._id} info={student} />
+        ))}
       </div>
     );
   }
 }
 const mapStateToProps = state => ({
-  student: state.student
+  students: state.student.studentInfo
 });
 export default connect(
   mapStateToProps,

@@ -73,36 +73,29 @@ router.post(
       return res.status(400).json(errors);
     }
 
-    Student.findOne({ roll: req.body.roll }).then(student => {
-      if (student) {
-        errors.roll = "Roll already exist";
-        return res.status(400).json(errors);
-      } else {
-        const newInfo = {
-          name: req.body.name,
-          roll: req.body.roll,
-          department: req.body.department,
-          semester: req.body.semester,
-          shift: req.body.shift
-        };
+    const newInfo = {
+      name: req.body.name,
+      roll: req.body.roll,
+      department: req.body.department,
+      semester: req.body.semester,
+      shift: req.body.shift
+    };
 
-        Student.findOneAndUpdate(
-          { _id: req.params.id },
-          {
-            $set: newInfo
-          },
-          { new: true }
-        )
-          .then(student => {
-            if (!student) {
-              return res.status(404).json({ msg: "Not found by id" });
-            }
+    Student.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        $set: newInfo
+      },
+      { new: true }
+    )
+      .then(student => {
+        if (!student) {
+          return res.status(404).json({ msg: "Not found by id" });
+        }
 
-            res.json(student);
-          })
-          .catch(err => res.json({ err: "Update Error" }));
-      }
-    });
+        res.json(student);
+      })
+      .catch(err => res.json({ err: "Update Error" }));
   }
 );
 
