@@ -1,0 +1,6 @@
+export const ADD_STUDENT = "ADD_STUDENT";
+export const GET_STUDENT = "GET_STUDENT";
+export const GET_CURRENT_STUDENT = "GET_CURRENT_STUDENT";
+export const GET_ERRORS = "GET_ERRORS";
+export const CLEAR_ERRORS = "CLEAR_ERRORS";
+export const SET_CURRENT_USER = "SET_CURRENT_USER";
