@@ -97,11 +97,11 @@ class EditStudent extends Component {
                     })}
                   >
                     <option disabled selected label="Select Department" />
-                    <option value="computer">Computer</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="electrical">Electrical</option>
-                    <option value="civil">Civil</option>
-                    <option value="environment">Environment</option>
+                    <option value="Computer">Computer</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Environment">Environment</option>
                   </select>
                   {errors.department && (
                     <div className="invalid-feedback">{errors.department}</div>

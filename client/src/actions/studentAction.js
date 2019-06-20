@@ -4,7 +4,9 @@ import {
   GET_STUDENT,
   GET_CURRENT_STUDENT,
   GET_ERRORS,
-  STUDENT_LOADING
+  STUDENT_LOADING,
+  SEARCH_STUDENT,
+  CLEAR_ERRORS
 } from "./types";
 
 export const addStudent = (newStudent, history) => dispatch => {
@@ -19,7 +21,7 @@ export const addStudent = (newStudent, history) => dispatch => {
     );
 };
 
-export const getStudent = id => dispatch => {
+export const getStudent = () => dispatch => {
   dispatch(setStudentLoading());
   axios.get(`/student`).then(res =>
     dispatch({
@@ -67,4 +69,26 @@ export const setStudentLoading = () => {
   return {
     type: STUDENT_LOADING
   };
+};
+
+// Search student
+export const searchStudent = searchQuery => dispatch => {
+  axios
+    .post("/student/search", searchQuery)
+    .then(
+      res =>
+        dispatch({
+          type: SEARCH_STUDENT,
+          payload: res.data
+        }),
+      dispatch({
+        type: CLEAR_ERRORS
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };

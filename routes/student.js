@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const router = express.Router();
 const validateStudentInput = require("../validation/student");
+const validateSearchInput = require("../validation/search");
 
 const Student = require("../models/Student");
 
@@ -106,16 +107,29 @@ router.delete(
   (req, res) => {
     Student.findByIdAndRemove({ _id: req.params.id })
       .then(res => {
-        router.get("/", (req, res) => {
-          Student.find()
-            .sort({ date: -1 })
-            .then(students => res.json(students))
-            .catch(err =>
-              res.status(404).json({ nostudentfound: "No Student Found" })
-            );
-        });
+        res.status(404).json({ nostudentfound: "No Student Found" });
       })
       .catch(err => res.json(err));
   }
 );
+
+// Student search route
+router.post("/search", (req, res) => {
+  const { errors, isValid } = validateSearchInput(req.body);
+
+  if (!isValid) {
+    return res.status(400).json(errors);
+  }
+  Student.findOne({ roll: req.body.search })
+    .then(result => {
+      if (result) {
+        res.json(result);
+        errors.search = ""
+      } else {
+        errors.search = "Student not found";
+        res.status(404).json(errors);
+      }
+    })
+    .catch(err => res.status(404).json(err));
+});
 module.exports = router;
