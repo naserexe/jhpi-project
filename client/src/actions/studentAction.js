@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { GET_STUDENT, GET_CURRENT_STUDENT, GET_ERRORS } from "./types";
+import {
+  GET_STUDENT,
+  GET_CURRENT_STUDENT,
+  GET_ERRORS,
+  STUDENT_LOADING
+} from "./types";
 
 export const addStudent = (newStudent, history) => dispatch => {
   axios
@@ -15,6 +20,7 @@ export const addStudent = (newStudent, history) => dispatch => {
 };
 
 export const getStudent = id => dispatch => {
+  dispatch(setStudentLoading());
   axios.get(`/student`).then(res =>
     dispatch({
       type: GET_STUDENT,
@@ -54,4 +60,11 @@ export const deleteStudent = id => dispatch => {
       payload: res.data
     })
   );
+};
+
+// Student loading
+export const setStudentLoading = () => {
+  return {
+    type: STUDENT_LOADING
+  };
 };
