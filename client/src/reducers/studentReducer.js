@@ -1,8 +1,7 @@
 import {
   GET_STUDENT,
   GET_CURRENT_STUDENT,
-  STUDENT_LOADING,
-  SEARCH_STUDENT
+  STUDENT_LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -18,11 +17,6 @@ export default function(state = initialState, action) {
         loading: true
       };
     case GET_STUDENT:
-      return {
-        ...state,
-        studentInfo: action.payload
-      };
-    case SEARCH_STUDENT:
       return {
         ...state,
         studentInfo: action.payload

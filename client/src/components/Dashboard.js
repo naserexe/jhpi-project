@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import classnames from "classnames";
 import StudentItem from "./student/StudentItem";
-import { getStudent, searchStudent } from "../actions/studentAction";
+import {
+  getStudent,
+  searchStudent,
+  filterStudent
+} from "../actions/studentAction";
 import Spinner from "../components/common/Spinner";
+import FilterData from "./FilterData";
 
 class Dashboard extends Component {
   state = {
@@ -25,6 +30,11 @@ class Dashboard extends Component {
     };
     this.props.searchStudent(searchQuery);
   };
+
+  filterStudent = (semester, shift, department) => {
+    this.props.filterStudent(semester, shift, department);
+  };
+
   render() {
     const { errors } = this.props;
     const { studentInfo, loading } = this.props.students;
@@ -50,7 +60,10 @@ class Dashboard extends Component {
           <div className="col-md-8 m-auto">
             <div className="card mb-3">
               <div className="card-body">
-                <div className="row">
+                <h5 className="card-header text-center">
+                  Filter and search data
+                </h5>
+                <div className="row mt-3">
                   <div className="col-md-6 m-auto mb-3">
                     <input
                       type="number"
@@ -76,6 +89,8 @@ class Dashboard extends Component {
                   </div>
                 </div>
               </div>
+              <hr />
+              <FilterData filterStudent={this.filterStudent} />
             </div>
           </div>
         </div>
@@ -91,5 +106,5 @@ const mapStateToProps = state => ({
 });
 export default connect(
   mapStateToProps,
-  { getStudent, searchStudent }
+  { getStudent, searchStudent, filterStudent }
 )(Dashboard);

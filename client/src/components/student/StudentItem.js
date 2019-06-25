@@ -5,7 +5,15 @@ import { deleteStudent, getStudent } from "../../actions/studentAction";
 
 class StudentItem extends Component {
   render() {
-    const { _id, name, roll, department, semester, shift } = this.props.info;
+    const {
+      _id,
+      name,
+      roll,
+      department,
+      semester,
+      shift,
+      QueryError
+    } = this.props.info;
 
     const onDelete = () => {
       const id = _id;
@@ -13,14 +21,16 @@ class StudentItem extends Component {
       this.props.getStudent();
     };
 
-    return (
-      <div className="container">
+    let showData;
+    if (roll) {
+      showData = (
         <div className="row">
           <div className="col-md-6 m-auto">
             <div className="card card-body bg-light mb-3">
               <h3>{name}</h3>
+              {showData}
               <p>
-                Roll: <b>{roll}</b>{" "}
+                Roll: <b className="text-info">{roll}</b>{" "}
               </p>
               <p>
                 Department: <b>{department}</b>{" "}
@@ -50,8 +60,12 @@ class StudentItem extends Component {
             </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      showData = <h1 className="text-danger text-center">{QueryError}</h1>;
+    }
+
+    return <div className="container">{showData}</div>;
   }
 }
 

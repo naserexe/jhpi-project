@@ -5,7 +5,6 @@ import {
   GET_CURRENT_STUDENT,
   GET_ERRORS,
   STUDENT_LOADING,
-  SEARCH_STUDENT,
   CLEAR_ERRORS
 } from "./types";
 
@@ -78,7 +77,31 @@ export const searchStudent = searchQuery => dispatch => {
     .then(
       res =>
         dispatch({
-          type: SEARCH_STUDENT,
+          type: GET_STUDENT,
+          payload: res.data
+        }),
+      dispatch({
+        type: CLEAR_ERRORS
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+// Filter Student by Semester
+export const filterStudent = (semester, shift, department) => dispatch => {
+  axios
+    .get(
+      `/student/filter?semester=${semester}&shift=${shift}&department=${department}`
+    )
+    .then(
+      res =>
+        dispatch({
+          type: GET_STUDENT,
           payload: res.data
         }),
       dispatch({

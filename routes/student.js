@@ -8,7 +8,32 @@ const validateSearchInput = require("../validation/search");
 const Student = require("../models/Student");
 
 // Test Route
-router.get("/test", (req, res) => res.json({ msg: "Works Student Route" }));
+router.get("/filter", (req, res) => {
+  const { department, semester, shift } = req.query;
+  let query = {};
+
+  if (department && department != "undefined") {
+    query.department = department;
+  }
+
+  if (semester && semester != "undefined") {
+    query.semester = semester;
+  }
+
+  if (shift && shift != "undefined") {
+    query.shift = shift;
+  }
+
+  Student.find(query)
+    .then(result => {
+      if (result.length > 0) {
+        res.json(result);
+      } else {
+        res.json({ QueryError: "Nothing found in your query" });
+      }
+    })
+    .catch(err => res.json(err));
+});
 
 //GEt Current student
 router.get("/:id", (req, res) => {
@@ -124,7 +149,7 @@ router.post("/search", (req, res) => {
     .then(result => {
       if (result) {
         res.json(result);
-        errors.search = ""
+        errors.search = "";
       } else {
         errors.search = "Student not found";
         res.status(404).json(errors);
@@ -132,4 +157,31 @@ router.post("/search", (req, res) => {
     })
     .catch(err => res.status(404).json(err));
 });
+
+// Filter result by Department
+router.get("/filter/department/:department", (req, res) => {
+  Student.find({ department: req.params.department })
+    .then(filterResult => {
+      if (filterResult.length > 0) {
+        res.json(filterResult);
+      } else {
+        res.json({ msg: `${req.params.department} has no student` });
+      }
+    })
+    .catch(err => res.status(404).json(err));
+});
+
+// Filter result by Semester
+router.get("/filter/semester/:semester", (req, res) => {
+  Student.find({ semester: req.params.semester })
+    .then(filterResult => {
+      if (filterResult.length > 0) {
+        res.json(filterResult);
+      } else {
+        res.json({ msg: `${req.params.semester} has no student` });
+      }
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 module.exports = router;
