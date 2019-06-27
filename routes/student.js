@@ -60,6 +60,7 @@ router.post(
       } else {
         const newStudent = new Student({
           name: req.body.name,
+          user: req.user.id,
           roll: req.body.roll,
           department: req.body.department,
           semester: req.body.semester,
@@ -109,9 +110,7 @@ router.post(
 
     Student.findOneAndUpdate(
       { _id: req.params.id },
-      {
-        $set: newInfo
-      },
+      { $set: newInfo },
       { new: true }
     )
       .then(student => {

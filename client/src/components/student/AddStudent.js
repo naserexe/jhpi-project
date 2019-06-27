@@ -87,7 +87,7 @@ class AddStudent extends Component {
                       "is-invalid": errors.department
                     })}
                   >
-                    <option disabled selected label="Select Department" />
+                    <option disabled defaultValue label="Select Department" />
                     <option value="Computer">Computer</option>
                     <option value="Electronics">Electronics</option>
                     <option value="Electrical">Electrical</option>
@@ -108,7 +108,7 @@ class AddStudent extends Component {
                       "is-invalid": errors.semester
                     })}
                   >
-                    <option disabled selected label="Select Semester" />
+                    <option disabled defaultValue label="Select Semester" />
                     <option value="First">First</option>
                     <option value="Second">Second</option>
                     <option value="Third">Third</option>
@@ -132,7 +132,7 @@ class AddStudent extends Component {
                       "is-invalid": errors.shift
                     })}
                   >
-                    <option disabled selected label="Select Shift" />
+                    <option disabled defaultValue label="Select Shift" />
                     <option value="First">First</option>
                     <option value="Second">Second</option>
                   </select>

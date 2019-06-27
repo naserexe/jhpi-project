@@ -7,6 +7,7 @@ class StudentItem extends Component {
   render() {
     const {
       _id,
+      user,
       name,
       roll,
       department,
@@ -15,6 +16,7 @@ class StudentItem extends Component {
       QueryError
     } = this.props.info;
 
+    const { auth } = this.props;
     const onDelete = () => {
       const id = _id;
       this.props.deleteStudent(id);
@@ -26,7 +28,7 @@ class StudentItem extends Component {
       showData = (
         <div className="row">
           <div className="col-md-6 m-auto">
-            <div className="card card-body bg-light mb-3">
+            <div className="card card-body bg-light mb-2">
               <h3>{name}</h3>
               {showData}
               <p>
@@ -44,19 +46,23 @@ class StudentItem extends Component {
                 Shift: <b>{shift}</b>{" "}
               </p>
 
-              <div className="row justify-content-md-center">
-                <div className="col col-lg-6">
-                  <Link className="btn btn-info" to={`/student/edit/${_id}`}>
-                    Edit
-                  </Link>
-                </div>
+              {user === auth.user.id ||
+              // This condition check a specific user for edit and delete for all the post
+              auth.user.id === "5d09dd5472941e4de0a4e77e" ? (
+                <div className="row justify-content-md-center">
+                  <div className="col col-lg-6">
+                    <Link className="btn btn-info" to={`/student/edit/${_id}`}>
+                      Edit
+                    </Link>
+                  </div>
 
-                <div className="col col-lg-2">
-                  <button className="btn btn-danger" onClick={onDelete}>
-                    Delete
-                  </button>
+                  <div className="col col-lg-2">
+                    <button className="btn btn-danger" onClick={onDelete}>
+                      Delete
+                    </button>
+                  </div>
                 </div>
-              </div>
+              ) : null}
             </div>
           </div>
         </div>
@@ -70,7 +76,8 @@ class StudentItem extends Component {
 }
 
 const mapStateToProps = state => ({
-  student: state.student.studentInfo
+  student: state.student.studentInfo,
+  auth: state.auth
 });
 export default connect(
   mapStateToProps,

@@ -102,6 +102,7 @@ class Dashboard extends Component {
 }
 const mapStateToProps = state => ({
   students: state.student,
+
   errors: state.errors
 });
 export default connect(

@@ -30,7 +30,7 @@ export const getStudent = () => dispatch => {
   );
 };
 
-// GEt Current Student
+// GEt Current Student for updating
 export const getCurrentStudent = id => dispatch => {
   axios.get(`/student/${id}`).then(res =>
     dispatch({
