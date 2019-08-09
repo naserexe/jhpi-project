@@ -1,4 +1,4 @@
-# jhpi-project
+# jhpi-project | A simple CRUD App built with MERN Stack
 
 # Install dependencies for server
 npm install
