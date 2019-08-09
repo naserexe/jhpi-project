@@ -1,5 +1,10 @@
-# jhpi-project | A simple CRUD App built with MERN Stack
+# JhPI-project
 
+> A simple CRUD and some filtering built with the MERN stack along with Redux for state management.
+
+## Quick Start
+
+```bash
 # Install dependencies for server
 npm install
 
@@ -16,3 +21,19 @@ npm run server
 npm run client
 
 # Server runs on http://localhost:5000 and client on http://localhost:3000
+```
+
+## Deployment
+
+There is a Heroku post build script so that you do not have to compile your React frontend manually, it is done on the server. Simply push to Heroku and it will build and load the client index.html page
+
+## App Info
+
+### Author
+
+Abdullah Naser
+facebokk.com/naser4100
+
+### Version
+
+1.0.0
